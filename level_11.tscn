@@ -1,0 +1,154 @@
+[gd_scene load_steps=20 format=3 uid="uid://bcdic7iey6q62"]
+
+[ext_resource type="PackedScene" uid="uid://crns75i0bpdds" path="res://dead.tscn" id="1_mu8p6"]
+[ext_resource type="PackedScene" uid="uid://d1hyair64fnhi" path="res://end.tscn" id="2_ollx4"]
+[ext_resource type="PackedScene" uid="uid://dgh1ctrxvvrf6" path="res://level_12.tscn" id="3_nd4o8"]
+[ext_resource type="PackedScene" uid="uid://cql5h6fbuob6d" path="res://character.tscn" id="3_pdebp"]
+[ext_resource type="Script" uid="uid://c8e43tlg7ongl" path="res://background.gd" id="4_ss8ks"]
+[ext_resource type="TileSet" uid="uid://bn78qcjru6j1w" path="res://assets/tile_set.tres" id="5_eqxot"]
+[ext_resource type="Script" uid="uid://dsa626tcxxgp2" path="res://DimentionSwitch.gd" id="6_iwsed"]
+[ext_resource type="PackedScene" uid="uid://rnyhbtamosts" path="res://double_jump_power.tscn" id="7_l0c21"]
+[ext_resource type="PackedScene" uid="uid://k3pc3iqcg7h5" path="res://warp.tscn" id="8_2b61i"]
+[ext_resource type="PackedScene" uid="uid://c6mj14quuu8v7" path="res://moving_platform.tscn" id="9_35xt6"]
+[ext_resource type="PackedScene" uid="uid://cm55t5qn15vef" path="res://hud.tscn" id="11_h7pw1"]
+[ext_resource type="PackedScene" uid="uid://dvbut2mdtu8g" path="res://save.tscn" id="12_nonkd"]
+[ext_resource type="PackedScene" uid="uid://csua7qlbvy3bh" path="res://timer.tscn" id="13_v4o4g"]
+[ext_resource type="PackedScene" uid="uid://bgaj7riptjb32" path="res://pause_menu.tscn" id="14_tings"]
+[ext_resource type="PackedScene" uid="uid://b3ymhq63ty5q2" path="res://blind_mode.tscn" id="15_bileh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q44ch"]
+size = Vector2(480, 2912)
+
+[sub_resource type="Animation" id="Animation_0xw3s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(648, 472)]
+}
+
+[sub_resource type="Animation" id="Animation_bx8ds"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(648, 472), Vector2(904, 472)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_egbc2"]
+_data = {
+&"RESET": SubResource("Animation_0xw3s"),
+&"new_animation": SubResource("Animation_bx8ds")
+}
+
+[node name="level_11" type="Node2D"]
+
+[node name="Dead" parent="." node_paths=PackedStringArray("Start_pos", "reset") instance=ExtResource("1_mu8p6")]
+position = Vector2(-1520, 776)
+scale = Vector2(100, 1.667)
+Start_pos = NodePath("../start_pos")
+reset = [NodePath("../Dimention1/double_jump_power"), NodePath("../Dimention1/warp")]
+MDL = true
+
+[node name="start_pos" type="Marker2D" parent="."]
+position = Vector2(64, 544)
+
+[node name="End" parent="." instance=ExtResource("2_ollx4")]
+position = Vector2(2824, 0)
+scale = Vector2(1, 11.03)
+level = ExtResource("3_nd4o8")
+
+[node name="Character" parent="." instance=ExtResource("3_pdebp")]
+position = Vector2(24, 600)
+platform_on_leave = 1
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("4_ss8ks")
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("5_eqxot")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 655363, 0, 0, 655362, 0, 0, 458795, 65536, 0, 458794, 65536, 0, 458793, 65536, 0)
+
+[node name="DimentionSwitch" type="Node" parent="."]
+script = ExtResource("6_iwsed")
+
+[node name="Dimention1" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Dimention1"]
+position = Vector2(640, 344)
+scale = Vector2(0.25, 0.25)
+
+[node name="collision" type="StaticBody2D" parent="Dimention1"]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Dimention1/collision"]
+position = Vector2(-240, 1360)
+shape = SubResource("RectangleShape2D_q44ch")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="double_jump_power" parent="Dimention1" instance=ExtResource("7_l0c21")]
+position = Vector2(152, 552)
+scale = Vector2(0.8, 0.8)
+
+[node name="warp" parent="Dimention1" instance=ExtResource("8_2b61i")]
+position = Vector2(440, 408)
+
+[node name="Dimention2" type="Node2D" parent="."]
+position = Vector2(1528, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Dimention2"]
+position = Vector2(640, 344)
+scale = Vector2(0.25, 0.25)
+enabled = false
+
+[node name="collision" type="StaticBody2D" parent="Dimention2"]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Dimention2/collision"]
+position = Vector2(-240, 1360)
+shape = SubResource("RectangleShape2D_q44ch")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="moving_platform" parent="Dimention2" instance=ExtResource("9_35xt6")]
+position = Vector2(648, 472)
+scale = Vector2(3, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dimention2"]
+libraries = {
+"": SubResource("AnimationLibrary_egbc2")
+}
+autoplay = "new_animation"
+
+[node name="HUD" parent="." instance=ExtResource("11_h7pw1")]
+position = Vector2(0, -16)
+
+[node name="HUD" parent="HUD" instance=ExtResource("11_h7pw1")]
+position = Vector2(1528, 0)
+
+[node name="save" parent="." instance=ExtResource("12_nonkd")]
+level = 11
+
+[node name="Timer" parent="." instance=ExtResource("13_v4o4g")]
+
+[node name="pause_menu" parent="." instance=ExtResource("14_tings")]
+position = Vector2(0, -16)
+
+[node name="blind_mode" parent="." instance=ExtResource("15_bileh")]

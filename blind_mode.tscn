@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3ymhq63ty5q2"]
+
+[ext_resource type="Script" uid="uid://dcts24w1tfg4k" path="res://blind_mode.gd" id="1_50y2b"]
+
+[node name="blind_mode" type="Node2D"]
+script = ExtResource("1_50y2b")

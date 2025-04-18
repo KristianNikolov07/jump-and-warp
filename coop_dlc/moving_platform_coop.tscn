@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds6vv6igiscb"]
+
+[ext_resource type="Script" uid="uid://cf16jqysddxvt" path="res://coop_dlc/moving_platform_coop.gd" id="1_6mkd0"]
+[ext_resource type="PackedScene" uid="uid://c6mj14quuu8v7" path="res://moving_platform.tscn" id="1_fbenl"]
+
+[sub_resource type="Animation" id="Animation_xs04q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -24)]
+}
+
+[sub_resource type="Animation" id="Animation_dm2ex"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -24), Vector2(0, -344)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_17sfn"]
+_data = {
+&"RESET": SubResource("Animation_xs04q"),
+&"new_animation": SubResource("Animation_dm2ex")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fmaic"]
+properties/0/path = NodePath("moving_platform:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="moving_platform_coop" type="Node2D"]
+script = ExtResource("1_6mkd0")
+
+[node name="moving_platform" parent="." instance=ExtResource("1_fbenl")]
+position = Vector2(0, -24)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_17sfn")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_fmaic")

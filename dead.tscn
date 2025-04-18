@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://crns75i0bpdds"]
+
+[ext_resource type="Script" uid="uid://d4l71n7bfxyr4" path="res://dead.gd" id="1_uucco"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kc46q"]
+size = Vector2(64, 64)
+
+[node name="Dead" type="Area2D"]
+script = ExtResource("1_uucco")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_kc46q")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

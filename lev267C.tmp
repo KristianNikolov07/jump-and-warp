@@ -1,0 +1,90 @@
+[gd_scene load_steps=13 format=3 uid="uid://ft5tl3of0xlu"]
+
+[ext_resource type="Script" path="res://background.gd" id="1_4osd7"]
+[ext_resource type="Texture2D" uid="uid://d32xoydqayhu5" path="res://assets/tilemap.png" id="2_ljccs"]
+[ext_resource type="PackedScene" uid="uid://cql5h6fbuob6d" path="res://character.tscn" id="2_thgk3"]
+[ext_resource type="PackedScene" uid="uid://crns75i0bpdds" path="res://dead.tscn" id="5_4tq2r"]
+[ext_resource type="PackedScene" uid="uid://d1hyair64fnhi" path="res://end.tscn" id="6_q027j"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvraj"]
+texture = ExtResource("2_ljccs")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_3otad"]
+sources/2 = SubResource("TileSetAtlasSource_cvraj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_catew"]
+size = Vector2(832, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gt3dc"]
+size = Vector2(256, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qh0h7"]
+size = Vector2(192, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ioc1"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6oxp"]
+size = Vector2(64, 704)
+
+[node name="level_0" type="Node2D"]
+position = Vector2(698.571, 380.988)
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_3otad")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655371, 2, 0, 655372, 2, 0, 655378, 2, 0, 655379, 2, 0, 655370, 2, 0, 458767, 65538, 0, 655376, 2, 0, 655377, 2, 0, 458765, 65538, 0, 458766, 65538, 0, 589829, 131073, 0)
+
+[node name="Character" parent="." instance=ExtResource("2_thgk3")]
+position = Vector2(56, 608)
+
+[node name="collision" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="collision"]
+position = Vector2(416, 653)
+shape = SubResource("RectangleShape2D_catew")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="collision"]
+position = Vector2(1152, 652)
+shape = SubResource("RectangleShape2D_gt3dc")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="collision"]
+position = Vector2(928, 504)
+shape = SubResource("RectangleShape2D_qh0h7")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="collision"]
+position = Vector2(352, 608)
+shape = SubResource("RectangleShape2D_6ioc1")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collision"]
+position = Vector2(-32, 352)
+shape = SubResource("RectangleShape2D_x6oxp")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 344)
+
+[node name="start_pos" type="Marker2D" parent="."]
+position = Vector2(104, 544)
+
+[node name="End" parent="." instance=ExtResource("6_q027j")]
+position = Vector2(1288, 0)
+scale = Vector2(1, 11.03)
+level = ExtResource("2_thgk3")
+
+[node name="Dead" parent="." node_paths=PackedStringArray("Start_pos") instance=ExtResource("5_4tq2r")]
+position = Vector2(-1328, 784)
+scale = Vector2(60, 1)
+Start_pos = NodePath("../start_pos")
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("1_4osd7")

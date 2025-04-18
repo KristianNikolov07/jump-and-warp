@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://ft5tl3of0xlu"]
+
+[ext_resource type="Script" uid="uid://c8e43tlg7ongl" path="res://background.gd" id="1_4osd7"]
+[ext_resource type="Texture2D" uid="uid://d32xoydqayhu5" path="res://assets/tilemap.png" id="2_ljccs"]
+[ext_resource type="PackedScene" uid="uid://cql5h6fbuob6d" path="res://character.tscn" id="2_thgk3"]
+[ext_resource type="PackedScene" uid="uid://ms1bjgraj3dx" path="res://level_1.tscn" id="4_gyivj"]
+[ext_resource type="PackedScene" uid="uid://crns75i0bpdds" path="res://dead.tscn" id="5_4tq2r"]
+[ext_resource type="PackedScene" uid="uid://d1hyair64fnhi" path="res://end.tscn" id="6_q027j"]
+[ext_resource type="PackedScene" uid="uid://cm55t5qn15vef" path="res://hud.tscn" id="7_amuv4"]
+[ext_resource type="PackedScene" uid="uid://dvbut2mdtu8g" path="res://save.tscn" id="8_vwfnu"]
+[ext_resource type="PackedScene" uid="uid://csua7qlbvy3bh" path="res://timer.tscn" id="9_t3j0j"]
+[ext_resource type="PackedScene" uid="uid://bgaj7riptjb32" path="res://pause_menu.tscn" id="10_dnxhx"]
+[ext_resource type="PackedScene" uid="uid://b3ymhq63ty5q2" path="res://blind_mode.tscn" id="11_bcnbn"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cvraj"]
+texture = ExtResource("2_ljccs")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_3otad"]
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_cvraj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dgkcr"]
+size = Vector2(64, 816)
+
+[node name="level_0" type="Node2D"]
+position = Vector2(704, 384)
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+tile_set = SubResource("TileSet_3otad")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 2, 0, 655361, 2, 0, 655362, 2, 0, 655363, 2, 0, 655364, 2, 0, 655365, 2, 0, 655366, 2, 0, 655367, 2, 0, 655368, 2, 0, 655369, 2, 0, 655371, 2, 0, 655372, 2, 0, 655378, 2, 0, 655379, 2, 0, 655370, 2, 0, 655376, 2, 0, 655377, 2, 0, 589829, 131074, 0)
+layer_1/y_sort_enabled = true
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Character" parent="." instance=ExtResource("2_thgk3")]
+position = Vector2(56, 608)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 344)
+
+[node name="start_pos" type="Marker2D" parent="."]
+position = Vector2(104, 544)
+
+[node name="End" parent="." instance=ExtResource("6_q027j")]
+position = Vector2(1288, 0)
+scale = Vector2(1, 11.03)
+level = ExtResource("4_gyivj")
+
+[node name="Dead" parent="." node_paths=PackedStringArray("Start_pos") instance=ExtResource("5_4tq2r")]
+position = Vector2(-1328, 784)
+scale = Vector2(60, 1)
+Start_pos = NodePath("../start_pos")
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("1_4osd7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-32, 344)
+shape = SubResource("RectangleShape2D_dgkcr")
+debug_color = Color(0.972549, 0, 0.435294, 0.419608)
+
+[node name="HUD" parent="." instance=ExtResource("7_amuv4")]
+position = Vector2(0, -16)
+
+[node name="Tutorial" type="RichTextLabel" parent="."]
+offset_left = 8.0
+offset_top = 672.0
+offset_right = 344.0
+offset_bottom = 768.0
+text = "Use A and D or the arrow keys to move"
+
+[node name="Tutorial2" type="RichTextLabel" parent="."]
+offset_left = 280.0
+offset_top = 464.0
+offset_right = 616.0
+offset_bottom = 560.0
+text = "Use SPACE to jump"
+
+[node name="save" parent="." instance=ExtResource("8_vwfnu")]
+
+[node name="Timer" parent="." instance=ExtResource("9_t3j0j")]
+
+[node name="pause_menu" parent="." instance=ExtResource("10_dnxhx")]
+position = Vector2(0, -16)
+
+[node name="blind_mode" parent="." instance=ExtResource("11_bcnbn")]
