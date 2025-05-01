@@ -1,0 +1,389 @@
+[gd_scene load_steps=6 format=3 uid="uid://dsugivu00h4x2"]
+
+[ext_resource type="Script" uid="uid://bl2t2jxuwbfiy" path="res://scripts/main_menu.gd" id="1_8ln24"]
+[ext_resource type="Script" uid="uid://c8e43tlg7ongl" path="res://scripts/background.gd" id="2_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://bqi2u8ydh2qdp" path="res://assets/double_jump.png" id="3_oa1go"]
+[ext_resource type="Texture2D" uid="uid://w8r3blplvph0" path="res://assets/warp.png" id="4_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://dwj87c1h3tfev" path="res://assets/dash.png" id="5_jk1qb"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -48.0
+offset_bottom = -48.0
+script = ExtResource("1_8ln24")
+
+[node name="new_game" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 96.0
+offset_right = 752.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 40
+text = "New Game"
+
+[node name="continue" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 192.0
+offset_right = 752.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "Continue"
+
+[node name="challenges" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 296.0
+offset_right = 752.0
+offset_bottom = 376.0
+theme_override_font_sizes/font_size = 40
+text = "Challenges"
+
+[node name="leaderboard" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 512.0
+offset_right = 751.0
+offset_bottom = 592.0
+theme_override_font_sizes/font_size = 40
+text = "Leaderboard"
+
+[node name="walktrough" type="Button" parent="."]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 616.0
+offset_right = 319.0
+offset_bottom = 696.0
+theme_override_font_sizes/font_size = 40
+text = "Walkthrough"
+
+[node name="Credits" type="Button" parent="."]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 616.0
+offset_right = 1215.0
+offset_bottom = 696.0
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 616.0
+offset_right = 751.0
+offset_bottom = 696.0
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="credits_cam" type="Camera2D" parent="."]
+position = Vector2(1860, 1366)
+enabled = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="credits_cam"]
+offset_left = -164.0
+offset_top = -342.0
+offset_right = 132.0
+offset_bottom = -238.0
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center] Credits"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="credits_cam"]
+offset_left = -356.0
+offset_top = -246.0
+offset_right = 340.0
+offset_bottom = -142.0
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center]Developer: 
+"
+
+[node name="RichTextLabel4" type="RichTextLabel" parent="credits_cam"]
+offset_left = -676.0
+offset_top = -86.0
+offset_right = 20.0
+offset_bottom = -6.0
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center]Sounds:
+"
+
+[node name="RichTextLabel6" type="RichTextLabel" parent="credits_cam"]
+offset_left = -12.0
+offset_top = -86.0
+offset_right = 684.0
+offset_bottom = -6.0
+theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/bold_font_size = 30
+bbcode_enabled = true
+text = "[center]Playtester:
+"
+
+[node name="LinkButton" type="LinkButton" parent="credits_cam"]
+offset_left = -604.0
+offset_top = 90.0
+offset_right = -64.0
+offset_bottom = 132.0
+theme_override_font_sizes/font_size = 30
+text = "Open and Closed Door - SoundReality"
+underline = 1
+uri = "https://pixabay.com/sound-effects/open-and-closed-door-156814/"
+
+[node name="LinkButton2" type="LinkButton" parent="credits_cam"]
+offset_left = -564.0
+offset_top = 50.0
+offset_right = -24.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 30
+text = "Flash and Quicksilver - Pixabay"
+underline = 1
+uri = "https://pixabay.com/sound-effects/flash-and-quicksilver-103357/"
+
+[node name="LinkButton5" type="LinkButton" parent="credits_cam"]
+offset_left = -500.0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 30
+text = "Cartoon jump - Pixabay"
+underline = 1
+uri = "https://pixabay.com/sound-effects/cartoon-jump-6462/"
+
+[node name="LinkButton6" type="LinkButton" parent="credits_cam"]
+offset_left = -484.0
+offset_top = -30.0
+offset_right = 56.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 30
+text = "Wood Break - Pixabay"
+underline = 1
+uri = "https://pixabay.com/sound-effects/wood-break-40011/"
+
+[node name="LinkButton7" type="LinkButton" parent="credits_cam"]
+offset_left = -604.0
+offset_top = 170.0
+offset_right = -62.0
+offset_bottom = 212.0
+theme_override_font_sizes/font_size = 30
+text = "Falling Whistle (Cartoon) - VoiceBosch"
+underline = 1
+uri = "https://pixabay.com/sound-effects/falling-whistle-cartoon-180579/"
+
+[node name="LinkButton9" type="LinkButton" parent="credits_cam"]
+offset_left = -210.0
+offset_top = -182.0
+offset_right = 330.0
+offset_bottom = -140.0
+theme_override_font_sizes/font_size = 30
+text = "Kristian Nikolov(KNProNoob)"
+underline = 1
+uri = "https://knpronoob.xyz"
+
+[node name="LinkButton3" type="LinkButton" parent="credits_cam"]
+offset_left = -476.0
+offset_top = 130.0
+offset_right = -155.0
+offset_bottom = 172.0
+theme_override_font_sizes/font_size = 30
+text = "Laser Gun - Pixabay"
+underline = 1
+uri = "https://pixabay.com/sound-effects/laser-gun-81720/"
+
+[node name="LinkButton4" type="LinkButton" parent="credits_cam"]
+offset_left = 244.0
+offset_top = -30.0
+offset_right = 565.0
+offset_bottom = 12.0
+theme_override_font_sizes/font_size = 30
+text = "Sasho Basho"
+underline = 1
+uri = "https://gamejolt.com/@TurshiaTuesday"
+
+[node name="back_to_menu" type="Button" parent="credits_cam"]
+offset_left = -52.0
+offset_top = 242.0
+offset_right = 48.0
+offset_bottom = 305.0
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("2_rtw2f")
+
+[node name="challenges_cam" type="Camera2D" parent="."]
+position = Vector2(2960, 512)
+enabled = false
+
+[node name="back_to_menu" type="Button" parent="challenges_cam"]
+offset_left = -52.0
+offset_top = 242.0
+offset_right = 48.0
+offset_bottom = 305.0
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="challenges_cam"]
+offset_left = -432.0
+offset_top = -160.0
+offset_right = 8.0
+offset_bottom = -80.0
+theme_override_font_sizes/normal_font_size = 50
+text = "Hardcore mode:"
+
+[node name="hardcore_start" type="Button" parent="challenges_cam"]
+offset_left = 16.0
+offset_top = -160.0
+offset_right = 272.0
+offset_bottom = -80.0
+theme_override_font_sizes/font_size = 40
+text = "Start"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="challenges_cam"]
+offset_left = -432.0
+offset_top = -48.0
+offset_right = 8.0
+offset_bottom = 32.0
+theme_override_font_sizes/normal_font_size = 50
+text = "Blind mode:"
+
+[node name="new_game_blind" type="Button" parent="challenges_cam"]
+offset_left = 16.0
+offset_top = -48.0
+offset_right = 272.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 40
+text = "New Game"
+
+[node name="continue_blind" type="Button" parent="challenges_cam"]
+offset_left = 296.0
+offset_top = -48.0
+offset_right = 552.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "Continue"
+
+[node name="DoubleJump" type="Sprite2D" parent="."]
+position = Vector2(1344, 1112)
+rotation = -0.728881
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="DoubleJump3" type="Sprite2D" parent="."]
+position = Vector2(864, 568)
+rotation = 0.462539
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="DoubleJump4" type="Sprite2D" parent="."]
+position = Vector2(160, 344)
+rotation = -0.627233
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="DoubleJump5" type="Sprite2D" parent="."]
+position = Vector2(2440, 776)
+rotation = -0.124948
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="DoubleJump6" type="Sprite2D" parent="."]
+position = Vector2(2976, 232)
+rotation = 2.26116
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="DoubleJump2" type="Sprite2D" parent="."]
+position = Vector2(2104, 1656)
+rotation = 1.0321
+scale = Vector2(5.64286, 5)
+texture = ExtResource("3_oa1go")
+
+[node name="Warp" type="Sprite2D" parent="."]
+position = Vector2(2240, 1232)
+rotation = 0.46962
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Warp3" type="Sprite2D" parent="."]
+position = Vector2(1048, 392)
+rotation = 0.46962
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Warp5" type="Sprite2D" parent="."]
+position = Vector2(3368, 728)
+rotation = 0.46962
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Warp6" type="Sprite2D" parent="."]
+position = Vector2(2416, 408)
+rotation = -0.433631
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Warp4" type="Sprite2D" parent="."]
+position = Vector2(384, 224)
+rotation = -0.394756
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Warp2" type="Sprite2D" parent="."]
+position = Vector2(1264, 1432)
+rotation = 0.46962
+scale = Vector2(6.5, 7.26923)
+texture = ExtResource("4_tbmy8")
+
+[node name="Dash" type="Sprite2D" parent="."]
+position = Vector2(2352, 1512)
+rotation = -0.632798
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[node name="Dash5" type="Sprite2D" parent="."]
+position = Vector2(2784, 664)
+rotation = -0.632798
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[node name="Dash6" type="Sprite2D" parent="."]
+position = Vector2(3440, 304)
+rotation = -2.28681
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[node name="Dash3" type="Sprite2D" parent="."]
+position = Vector2(1168, 160)
+rotation = -0.172805
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[node name="Dash4" type="Sprite2D" parent="."]
+position = Vector2(360, 528)
+rotation = -2.47224
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[node name="Dash2" type="Sprite2D" parent="."]
+position = Vector2(2336, 1088)
+rotation = -2.42139
+scale = Vector2(5, 5.64286)
+texture = ExtResource("5_jk1qb")
+
+[connection signal="pressed" from="new_game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="challenges" to="." method="_on_challenges_pressed"]
+[connection signal="pressed" from="leaderboard" to="." method="_on_leaderboard_pressed"]
+[connection signal="pressed" from="walktrough" to="." method="_on_walktrough_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="credits_cam/back_to_menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="challenges_cam/back_to_menu" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="challenges_cam/hardcore_start" to="." method="_on_hardcore_start_pressed"]
+[connection signal="pressed" from="challenges_cam/new_game_blind" to="." method="_on_new_game_blind_pressed"]
+[connection signal="pressed" from="challenges_cam/continue_blind" to="." method="_on_continue_blind_pressed"]

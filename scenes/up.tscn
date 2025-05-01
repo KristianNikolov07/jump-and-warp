@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://0sy2rcivu3ch"]
+
+[ext_resource type="Script" uid="uid://cd6v7280loi4o" path="res://scripts/up.gd" id="1_3kim6"]
+[ext_resource type="Texture2D" uid="uid://cc47g3xrp5yan" path="res://assets/up_booster1.png" id="1_jvlpo"]
+[ext_resource type="Texture2D" uid="uid://bgidi7yhpq1ap" path="res://assets/up_booster.png" id="2_pceey"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tac4e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_jvlpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pceey")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcfyi"]
+size = Vector2(64, 104)
+
+[node name="up" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_3kim6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.32549)
+position = Vector2(32, 52)
+scale = Vector2(3.04762, 2.88889)
+sprite_frames = SubResource("SpriteFrames_tac4e")
+autoplay = "default"
+frame = 1
+frame_progress = 0.807273
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, 52)
+shape = SubResource("RectangleShape2D_wcfyi")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

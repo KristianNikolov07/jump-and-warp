@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://k3pc3iqcg7h5"]
+
+[ext_resource type="Texture2D" uid="uid://w8r3blplvph0" path="res://assets/warp.png" id="1_h7y04"]
+[ext_resource type="Script" uid="uid://bwkxw3nw4bgap" path="res://scripts/warp.gd" id="1_ukfg7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yi0b1"]
+size = Vector2(64, 104)
+
+[sub_resource type="Animation" id="Animation_ncq21"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(104, 76)]
+}
+
+[sub_resource type="Animation" id="Animation_1phx4"]
+resource_name = "new_animation"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(104, 76), Vector2(104, 56)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qliw6"]
+_data = {
+&"RESET": SubResource("Animation_ncq21"),
+&"new_animation": SubResource("Animation_1phx4")
+}
+
+[node name="warp" type="Area2D"]
+texture_filter = 1
+script = ExtResource("1_ukfg7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(104, 76)
+scale = Vector2(7.75, 7.94231)
+texture = ExtResource("1_h7y04")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(104, 76)
+shape = SubResource("RectangleShape2D_yi0b1")
+debug_color = Color(0, 0.631373, 0.458824, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qliw6")
+}
+autoplay = "new_animation"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

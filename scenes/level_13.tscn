@@ -1,0 +1,131 @@
+[gd_scene load_steps=18 format=3 uid="uid://cvx60u7cq3eqd"]
+
+[ext_resource type="PackedScene" uid="uid://crns75i0bpdds" path="res://scenes/dead.tscn" id="1_ektkd"]
+[ext_resource type="PackedScene" uid="uid://d1hyair64fnhi" path="res://scenes/end.tscn" id="2_lult1"]
+[ext_resource type="PackedScene" uid="uid://bopb24le34l08" path="res://scenes/level_14.tscn" id="3_kblr4"]
+[ext_resource type="PackedScene" uid="uid://cql5h6fbuob6d" path="res://scenes/character.tscn" id="3_vunwd"]
+[ext_resource type="Script" uid="uid://c8e43tlg7ongl" path="res://scripts/background.gd" id="4_dwth0"]
+[ext_resource type="TileSet" uid="uid://bn78qcjru6j1w" path="res://assets/tile_set.tres" id="5_lfobb"]
+[ext_resource type="PackedScene" uid="uid://cqffy2sfc6m71" path="res://scenes/dash_power.tscn" id="6_liyg3"]
+[ext_resource type="PackedScene" uid="uid://c6mj14quuu8v7" path="res://scenes/moving_platform.tscn" id="7_va8sr"]
+[ext_resource type="PackedScene" uid="uid://cm55t5qn15vef" path="res://scenes/hud.tscn" id="9_4c4jx"]
+[ext_resource type="PackedScene" uid="uid://dvbut2mdtu8g" path="res://scenes/save.tscn" id="10_yygdo"]
+[ext_resource type="PackedScene" uid="uid://csua7qlbvy3bh" path="res://scenes/timer.tscn" id="11_esxni"]
+[ext_resource type="PackedScene" uid="uid://bgaj7riptjb32" path="res://scenes/pause_menu.tscn" id="12_m61bq"]
+[ext_resource type="PackedScene" uid="uid://b3ymhq63ty5q2" path="res://scenes/blind_mode.tscn" id="13_vxla3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5n82"]
+size = Vector2(480, 2912)
+
+[sub_resource type="Animation" id="Animation_psa12"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1088, 552)]
+}
+
+[sub_resource type="Animation" id="Animation_285a8"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1088, 552), Vector2(704, 552)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4mwnv"]
+_data = {
+&"RESET": SubResource("Animation_psa12"),
+&"new_animation": SubResource("Animation_285a8")
+}
+
+[node name="level_13" type="Node2D"]
+
+[node name="Dead" parent="." node_paths=PackedStringArray("Start_pos", "reset") instance=ExtResource("1_ektkd")]
+position = Vector2(-1520, 776)
+scale = Vector2(100, 1.667)
+Start_pos = NodePath("../start_pos")
+reset = [NodePath("../dash_power")]
+
+[node name="start_pos" type="Marker2D" parent="."]
+position = Vector2(64, 544)
+
+[node name="End" parent="." instance=ExtResource("2_lult1")]
+position = Vector2(1288, -8)
+scale = Vector2(1, 11.03)
+level = ExtResource("3_kblr4")
+
+[node name="Character" parent="." instance=ExtResource("3_vunwd")]
+position = Vector2(24, 600)
+platform_on_leave = 1
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("4_dwth0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 344)
+scale = Vector2(0.25, 0.25)
+
+[node name="collision" type="StaticBody2D" parent="."]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="collision"]
+position = Vector2(-240, 1360)
+shape = SubResource("RectangleShape2D_n5n82")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("5_lfobb")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 655362, 0, 0, 655363, 0, 0)
+
+[node name="dash_power" parent="." instance=ExtResource("6_liyg3")]
+position = Vector2(184, 576)
+scale = Vector2(0.8, 0.8)
+
+[node name="moving_platform" parent="." instance=ExtResource("7_va8sr")]
+position = Vector2(1088, 552)
+scale = Vector2(3, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4mwnv")
+}
+autoplay = "new_animation"
+
+[node name="HUD" parent="." instance=ExtResource("9_4c4jx")]
+position = Vector2(0, -16)
+
+[node name="tutorial" type="RichTextLabel" parent="."]
+offset_left = 112.0
+offset_top = 496.0
+offset_right = 448.0
+offset_bottom = 608.0
+text = "Use Left Click or SHIFT to dash"
+
+[node name="save" parent="." instance=ExtResource("10_yygdo")]
+level = 13
+
+[node name="Timer" parent="." instance=ExtResource("11_esxni")]
+
+[node name="pause_menu" parent="." instance=ExtResource("12_m61bq")]
+position = Vector2(0, -16)
+
+[node name="blind_mode" parent="." instance=ExtResource("13_vxla3")]

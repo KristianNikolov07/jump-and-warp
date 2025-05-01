@@ -12,14 +12,14 @@ config_version=5
 
 config/name="Jump and Warp"
 config/version="1.0"
-run/main_scene="res://main_menu.tscn"
+run/main_scene="res://scenes/main_menu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://assets/icon.png"
 
 [autoload]
 
-Global="*res://global.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 

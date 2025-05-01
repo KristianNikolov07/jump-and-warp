@@ -1,0 +1,173 @@
+[gd_scene load_steps=21 format=3 uid="uid://bopb24le34l08"]
+
+[ext_resource type="PackedScene" uid="uid://crns75i0bpdds" path="res://scenes/dead.tscn" id="1_a2q6p"]
+[ext_resource type="PackedScene" uid="uid://d1hyair64fnhi" path="res://scenes/end.tscn" id="2_jj3jp"]
+[ext_resource type="PackedScene" uid="uid://cql5h6fbuob6d" path="res://scenes/character.tscn" id="3_irrws"]
+[ext_resource type="PackedScene" uid="uid://bpc8o4e1knr38" path="res://scenes/level_15.tscn" id="3_pcoqw"]
+[ext_resource type="Script" uid="uid://c8e43tlg7ongl" path="res://scripts/background.gd" id="4_qv1ht"]
+[ext_resource type="TileSet" uid="uid://bn78qcjru6j1w" path="res://assets/tile_set.tres" id="5_ssilr"]
+[ext_resource type="PackedScene" uid="uid://k3pc3iqcg7h5" path="res://scenes/warp.tscn" id="6_wq6vx"]
+[ext_resource type="PackedScene" uid="uid://c6mj14quuu8v7" path="res://scenes/moving_platform.tscn" id="7_j2131"]
+[ext_resource type="PackedScene" uid="uid://cqffy2sfc6m71" path="res://scenes/dash_power.tscn" id="7_ymrnd"]
+[ext_resource type="Script" uid="uid://dsa626tcxxgp2" path="res://scripts/DimentionSwitch.gd" id="8_fg2nb"]
+[ext_resource type="PackedScene" uid="uid://rnyhbtamosts" path="res://scenes/double_jump_power.tscn" id="9_o6aqx"]
+[ext_resource type="PackedScene" uid="uid://cm55t5qn15vef" path="res://scenes/hud.tscn" id="12_50u7u"]
+[ext_resource type="PackedScene" uid="uid://dvbut2mdtu8g" path="res://scenes/save.tscn" id="13_yv6ki"]
+[ext_resource type="PackedScene" uid="uid://csua7qlbvy3bh" path="res://scenes/timer.tscn" id="14_6h0k5"]
+[ext_resource type="PackedScene" uid="uid://bgaj7riptjb32" path="res://scenes/pause_menu.tscn" id="15_kdbvc"]
+[ext_resource type="PackedScene" uid="uid://b3ymhq63ty5q2" path="res://scenes/blind_mode.tscn" id="16_6n1uy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mejj"]
+size = Vector2(480, 2912)
+
+[sub_resource type="Animation" id="Animation_rnpr3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(200, 536)]
+}
+
+[sub_resource type="Animation" id="Animation_x6hdn"]
+resource_name = "new_animation"
+length = 3.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("moving_platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(776, 536), Vector2(392, 536)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hkmif"]
+_data = {
+&"RESET": SubResource("Animation_rnpr3"),
+&"new_animation": SubResource("Animation_x6hdn")
+}
+
+[node name="level_14" type="Node2D"]
+
+[node name="Dead" parent="." node_paths=PackedStringArray("Start_pos", "reset") instance=ExtResource("1_a2q6p")]
+position = Vector2(-1520, 776)
+scale = Vector2(100, 1.667)
+Start_pos = NodePath("../start_pos")
+reset = [NodePath("../Dimention1/dash_power"), NodePath("../Dimention1/warp"), NodePath("../Dimention1/warp2"), NodePath("../Dimention2/double_jump_power"), NodePath("../Dimention2/warp"), NodePath("../Dimention2/dash_power2"), NodePath("../Dimention2/dash_power3")]
+MDL = true
+
+[node name="start_pos" type="Marker2D" parent="."]
+position = Vector2(64, 544)
+
+[node name="End" parent="." instance=ExtResource("2_jj3jp")]
+position = Vector2(2960, -8)
+scale = Vector2(1, 11.03)
+level = ExtResource("3_pcoqw")
+
+[node name="Character" parent="." instance=ExtResource("3_irrws")]
+position = Vector2(24, 600)
+platform_on_leave = 1
+
+[node name="enviroment" type="Node" parent="."]
+script = ExtResource("4_qv1ht")
+
+[node name="TileMap" type="TileMap" parent="."]
+scale = Vector2(4, 4)
+tile_set = ExtResource("5_ssilr")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 0, 0, 655361, 0, 0, 524291, 65536, 0, 524292, 65536, 0, 524293, 65536, 0, 262189, 131072, 0, 327725, 131072, 0, 393261, 131072, 0, 458797, 131072, 0, 524333, 131072, 0, 589869, 131072, 0, 655405, 131072, 0, 327687, 65536, 0, 327688, 65536, 0, 327689, 65536, 0, 196635, 65536, 0, 196636, 65536, 0, 196637, 65536, 0, 524319, 65536, 0, 524318, 65536, 0, 524317, 65536, 0, 196653, 131072, 0, 196646, 65536, 0, 196647, 65536, 0, 131117, 131072, 0)
+
+[node name="Dimention1" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Dimention1"]
+position = Vector2(640, 344)
+scale = Vector2(0.25, 0.25)
+
+[node name="collision" type="StaticBody2D" parent="Dimention1"]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Dimention1/collision"]
+position = Vector2(-240, 1360)
+shape = SubResource("RectangleShape2D_2mejj")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="dash_power" parent="Dimention1" instance=ExtResource("7_ymrnd")]
+position = Vector2(512, 264)
+scale = Vector2(0.8, 0.8)
+
+[node name="warp" parent="Dimention1" instance=ExtResource("6_wq6vx")]
+position = Vector2(184, 416)
+
+[node name="warp2" parent="Dimention1" instance=ExtResource("6_wq6vx")]
+position = Vector2(16, 88)
+
+[node name="Dimention2" type="Node2D" parent="."]
+position = Vector2(1656, 0)
+
+[node name="Camera2D" type="Camera2D" parent="Dimention2"]
+position = Vector2(640, 344)
+scale = Vector2(0.25, 0.25)
+enabled = false
+
+[node name="collision" type="StaticBody2D" parent="Dimention2"]
+scale = Vector2(0.25, 0.25)
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Dimention2/collision"]
+position = Vector2(-240, 1360)
+shape = SubResource("RectangleShape2D_2mejj")
+debug_color = Color(0.792157, 0.0705882, 0.337255, 0.419608)
+
+[node name="moving_platform" parent="Dimention2" instance=ExtResource("7_j2131")]
+position = Vector2(200, 536)
+scale = Vector2(3, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dimention2"]
+libraries = {
+"": SubResource("AnimationLibrary_hkmif")
+}
+autoplay = "new_animation"
+
+[node name="double_jump_power" parent="Dimention2" instance=ExtResource("9_o6aqx")]
+position = Vector2(832, 472)
+scale = Vector2(0.8, 0.8)
+
+[node name="warp" parent="Dimention2" instance=ExtResource("6_wq6vx")]
+position = Vector2(448, 168)
+
+[node name="dash_power2" parent="Dimention2" instance=ExtResource("7_ymrnd")]
+position = Vector2(1072, 72)
+scale = Vector2(0.8, 0.8)
+
+[node name="dash_power3" parent="Dimention2" instance=ExtResource("7_ymrnd")]
+position = Vector2(488, 48)
+scale = Vector2(0.8, 0.8)
+
+[node name="DimentionSwitch" type="Node" parent="."]
+script = ExtResource("8_fg2nb")
+
+[node name="HUD" parent="." instance=ExtResource("12_50u7u")]
+position = Vector2(0, -16)
+
+[node name="HUD" parent="HUD" instance=ExtResource("12_50u7u")]
+position = Vector2(1656, 0)
+
+[node name="save" parent="." instance=ExtResource("13_yv6ki")]
+level = 14
+
+[node name="Timer" parent="." instance=ExtResource("14_6h0k5")]
+
+[node name="pause_menu" parent="." instance=ExtResource("15_kdbvc")]
+position = Vector2(0, -16)
+
+[node name="blind_mode" parent="." instance=ExtResource("16_6n1uy")]

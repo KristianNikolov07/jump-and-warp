@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://cql5h6fbuob6d"]
+
+[ext_resource type="Script" uid="uid://c01sxjv2851no" path="res://scripts/character.gd" id="1_35q3v"]
+[ext_resource type="Texture2D" uid="uid://ckcxp4iengdc6" path="res://assets/character/idel.png" id="1_u7stn"]
+[ext_resource type="Texture2D" uid="uid://bpj5loxah4orp" path="res://assets/character/moving_front_1.png" id="3_c67ea"]
+[ext_resource type="Texture2D" uid="uid://3e4nery3wd3j" path="res://assets/character/moving_front_2.png" id="4_m4l21"]
+[ext_resource type="AudioStream" uid="uid://dpe4syvgdjgxi" path="res://assets/jump.mp3" id="5_2ugda"]
+[ext_resource type="AudioStream" uid="uid://ck4ip13sipukf" path="res://assets/dash.mp3" id="6_1ta60"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ombv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_u7stn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_c67ea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m4l21")
+}],
+"loop": true,
+"name": &"movement",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gsbl"]
+size = Vector2(48, 61)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_1sh4k"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("AnimatedSprite2D:flip_h")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="Character" type="CharacterBody2D"]
+z_index = 1
+texture_filter = 1
+platform_on_leave = 2
+script = ExtResource("1_35q3v")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5, -1.24998)
+scale = Vector2(3.35714, 3.44737)
+sprite_frames = SubResource("SpriteFrames_4ombv")
+animation = &"movement"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.500015, 0.250015)
+shape = SubResource("RectangleShape2D_1gsbl")
+
+[node name="dash_timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="double_jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_2ugda")
+
+[node name="dash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1ta60")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_1sh4k")
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
